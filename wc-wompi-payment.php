@@ -141,7 +141,9 @@ class Wompi_Payment_Gateway extends WC_Payment_Gateway {
       if ($result->esAprobada) {
         $customer_order->update_status( 'completed' );
 
-        $customer_order->add_order_note( __( 'Wompi payment completed.', 'serfinsa-payment' ) );
+        $customer_order->add_order_note( __( 'Wompi payment completed.' ) );
+        $customer_order->add_order_note( __( 'Wompi payment AUTH CODE.', $result->codigoAutorizacion ) );
+        $customer_order->add_order_note( __( 'Wompi payment TRANSACTION ID.', $result->idTransaccion ) );
 
         $order_id = method_exists( $customer_order, 'get_id' ) ? $customer_order->get_id() : $customer_order->ID;
 
